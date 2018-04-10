@@ -1,0 +1,294 @@
+{% extends "base.html" %}
+{% block title %}Controller{% endblock %}
+{% block header %}
+<script type=text/javascript>
+    $(function() {
+        $.getJSON(SCRIPT_ROOT + '/light', {
+            status: 3
+        }, function(data) {
+            $('#lightStat').html(data.result_text);
+        });
+        $('#lightOn').bind('click', function() {
+            $.getJSON(SCRIPT_ROOT + '/light', {
+                status: 1
+            }, function(data) {
+                $('#lightStat').html(data.result_text);
+            });
+            return false;
+        });
+        $('#lightOff').bind('click', function() {
+            $.getJSON(SCRIPT_ROOT + '/light', {
+                status: 0
+            }, function(data) {
+                $('#lightStat').html(data.result_text);
+            });
+            return false;
+        });
+        $.getJSON(SCRIPT_ROOT + '/base', {
+            status: 3
+        }, function(data) {
+            $('#baseStat').html(data.result_text);
+        });
+        $('#baseClockwise').bind('click', function() {
+            $.getJSON(SCRIPT_ROOT + '/base', {
+                status: 1
+            }, function(data) {
+                $('#baseStat').html(data.result_text);
+            });
+            return false;
+        });
+        $('#baseStop').bind('click', function() {
+            $.getJSON(SCRIPT_ROOT + '/base', {
+                status: 0
+            }, function(data) {
+                $('#baseStat').html(data.result_text);
+            });
+            return false;
+        });
+        $('#baseAntiClockwise').bind('click', function() {
+            $.getJSON(SCRIPT_ROOT + '/base', {
+                status: 2
+            }, function(data) {
+                $('#baseStat').html(data.result_text);
+            });
+            return false;
+        });
+        $.getJSON(SCRIPT_ROOT + '/shoulder', {
+            status: 3
+        }, function(data) {
+            $('#shoulderStat').html(data.result_text);
+        });
+        $('#shoulderUp').bind('click', function() {
+            $.getJSON(SCRIPT_ROOT + '/shoulder', {
+                status: 1
+            }, function(data) {
+                $('#shoulderStat').html(data.result_text);
+            });
+            return false;
+        });
+        $('#shoulderStop').bind('click', function() {
+            $.getJSON(SCRIPT_ROOT + '/shoulder', {
+                status: 0
+            }, function(data) {
+                $('#shoulderStat').html(data.result_text);
+            });
+            return false;
+        });
+        $('#shoulderDown').bind('click', function() {
+            $.getJSON(SCRIPT_ROOT + '/shoulder', {
+                status: 2
+            }, function(data) {
+                $('#shoulderStat').html(data.result_text);
+            });
+            return false;
+        });
+        $.getJSON(SCRIPT_ROOT + '/elbow', {
+            status: 3
+        }, function(data) {
+            $('#elbowStat').html(data.result_text);
+        });
+        $('#elbowUp').bind('click', function() {
+            $.getJSON(SCRIPT_ROOT + '/elbow', {
+                status: 1
+            }, function(data) {
+                $('#elbowStat').html(data.result_text);
+            });
+            return false;
+        });
+        $('#elbowStop').bind('click', function() {
+            $.getJSON(SCRIPT_ROOT + '/elbow', {
+                status: 0
+            }, function(data) {
+                $('#elbowStat').html(data.result_text);
+            });
+            return false;
+        });
+        $('#elbowDown').bind('click', function() {
+            $.getJSON(SCRIPT_ROOT + '/elbow', {
+                status: 2
+            }, function(data) {
+                $('#elbowStat').html(data.result_text);
+            });
+            return false;
+        });
+        $.getJSON(SCRIPT_ROOT + '/wrist', {
+            status: 3
+        }, function(data) {
+            $('#wristStat').html(data.result_text);
+        });
+        $('#wristUp').bind('click', function() {
+            $.getJSON(SCRIPT_ROOT + '/wrist', {
+                status: 1
+            }, function(data) {
+                $('#wristStat').html(data.result_text);
+            });
+            return false;
+        });
+        $('#wristStop').bind('click', function() {
+            $.getJSON(SCRIPT_ROOT + '/wrist', {
+                status: 0
+            }, function(data) {
+                $('#wristStat').html(data.result_text);
+            });
+            return false;
+        });
+        $('#wristDown').bind('click', function() {
+            $.getJSON(SCRIPT_ROOT + '/wrist', {
+                status: 2
+            }, function(data) {
+                $('#wristStat').html(data.result_text);
+            });
+            return false;
+        });
+        $.getJSON(SCRIPT_ROOT + '/gripper', {
+            status: 3
+        }, function(data) {
+            $('#gripperStat').html(data.result_text);
+        });
+        $('#gripperClose').bind('click', function() {
+            $.getJSON(SCRIPT_ROOT + '/gripper', {
+                status: 1
+            }, function(data) {
+                $('#gripperStat').html(data.result_text);
+            });
+            return false;
+        });
+        $('#gripperStop').bind('click', function() {
+            $.getJSON(SCRIPT_ROOT + '/gripper', {
+                status: 0
+            }, function(data) {
+                $('#gripperStat').html(data.result_text);
+            });
+            return false;
+        });
+        $('#gripperOpen').bind('click', function() {
+            $.getJSON(SCRIPT_ROOT + '/gripper', {
+                status: 2
+            }, function(data) {
+                $('#gripperStat').html(data.result_text);
+            });
+            return false;
+        });
+        $('#allStop').bind('click', function() {
+            $.getJSON(SCRIPT_ROOT + '/stop', { }, function(data) {
+                $('#lightStat').html('Off');
+                $('#baseStat').html('Stopped');
+                $('#shoulderStat').html('Stopped');
+                $('#elbowStat').html('Stopped');
+                $('#wristStat').html('Stopped');
+                $('#gripperStat').html('Stopped');
+            });
+            return false;
+        });
+    });
+</script>
+{% endblock %}
+{% block content %}
+<h1>{% block headline %}Controller{% endblock %}</h1>
+<div class="row">
+    <div class="col-md-8">
+        <div class="panel panel-primary">
+            <div class="panel-heading">
+                <h3 class="panel-title">Components</h3>
+            </div>
+            <div class="panel-body">
+                <div class="btn-group btn-group-justified" role="group">
+                    <div class="btn-group" role="group">
+                        <button type="button" class="btn btn-default">Base: <span id="baseStat">On</span></button>
+                    </div>
+                    <div class="btn-group" role="group">
+                        <button id="baseClockwise" type="button" class="btn btn-success">Clockwise</button>
+                    </div>
+                    <div class="btn-group" role="group">
+                        <button id="baseStop" type="button" class="btn btn-danger">Stop</button>
+                    </div>
+                    <div class="btn-group" role="group">
+                        <button id="baseAntiClockwise" type="button" class="btn btn-success">AntiClockwise</button>
+                    </div>
+                </div>
+                <div class="btn-group btn-group-justified" role="group">
+                    <div class="btn-group" role="group">
+                        <button type="button" class="btn btn-default">Shoulder: <span id="shoulderStat">On</span></button>
+                    </div>
+                    <div class="btn-group" role="group">
+                        <button id="shoulderUp" type="button" class="btn btn-success">Up</button>
+                    </div>
+                    <div class="btn-group" role="group">
+                        <button id="shoulderStop" type="button" class="btn btn-danger">Stop</button>
+                    </div>
+                    <div class="btn-group" role="group">
+                        <button id="shoulderDown" type="button" class="btn btn-success">Down</button>
+                    </div>
+                </div>
+                <div class="btn-group btn-group-justified" role="group">
+                    <div class="btn-group" role="group">
+                        <button type="button" class="btn btn-default">Elbow: <span id="elbowStat">On</span></button>
+                    </div>
+                    <div class="btn-group" role="group">
+                        <button id="elbowUp" type="button" class="btn btn-success">Up</button>
+                    </div>
+                    <div class="btn-group" role="group">
+                        <button id="elbowStop" type="button" class="btn btn-danger">Stop</button>
+                    </div>
+                    <div class="btn-group" role="group">
+                        <button id="elbowDown" type="button" class="btn btn-success">Down</button>
+                    </div>
+                </div>
+                <div class="btn-group btn-group-justified" role="group">
+                    <div class="btn-group" role="group">
+                        <button type="button" class="btn btn-default">Wrist: <span id="wristStat">On</span></button>
+                    </div>
+                    <div class="btn-group" role="group">
+                        <button id="wristUp" type="button" class="btn btn-success">Up</button>
+                    </div>
+                    <div class="btn-group" role="group">
+                        <button id="wristStop" type="button" class="btn btn-danger">Stop</button>
+                    </div>
+                    <div class="btn-group" role="group">
+                        <button id="wristDown" type="button" class="btn btn-success">Down</button>
+                    </div>
+                </div>
+                <div class="btn-group btn-group-justified" role="group">
+                    <div class="btn-group" role="group">
+                        <button type="button" class="btn btn-default">Gripper: <span id="gripperStat">On</span></button>
+                    </div>
+                    <div class="btn-group" role="group">
+                        <button id="gripperOpen" type="button" class="btn btn-success">Open</button>
+                    </div>
+                    <div class="btn-group" role="group">
+                        <button id="gripperStop" type="button" class="btn btn-danger">Stop</button>
+                    </div>
+                    <div class="btn-group" role="group">
+                        <button id="gripperClose" type="button" class="btn btn-success">Close</button>
+                    </div>
+                </div>
+                <div class="btn-group btn-group-justified" role="group">
+                    <div class="btn-group" role="group">
+                        <button id="allStop" type="button" class="btn btn-danger">Stop All</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+    <div class="col-md-4">
+        {% block upper_content %}{% endblock %}
+        <div class="panel panel-primary">
+            <div class="panel-heading">
+                <h3 class="panel-title">Light: <span id="lightStat">On</span></h3>
+            </div>
+            <div class="panel-body">
+                <div class="btn-group btn-group-justified" role="group">
+                    <div class="btn-group" role="group">
+                        <button id="lightOn" type="button" class="btn btn-success">On</button>
+                    </div>
+                    <div class="btn-group" role="group">
+                        <button id="lightOff" class="btn btn-danger">Off</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
+{% endblock %}
